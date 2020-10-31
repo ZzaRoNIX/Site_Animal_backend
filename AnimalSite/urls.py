@@ -21,7 +21,8 @@ from Backend import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^api/animals/$', views.animals_list),
-    url(r'^api/animals/(?P<id>[0-9]+)$', views.animals_detail),
-    url(r'^api/orders/(?P<id>[0-9]+)$', views.order_detail)
+    url(r'^api/animals/$', views.excel_view),
+    # url(r'^api/animals/$', views.animals_list),
+    # url(r'^api/animals/(?P<id>[0-9]+)$', views.animals_detail),
+    # url(r'^api/orders/(?P<id>[0-9]+)$', views.order_detail)
 ]
