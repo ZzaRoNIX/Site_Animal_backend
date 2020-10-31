@@ -18,18 +18,18 @@ import openpyxl
 from pathlib import Path
 
 
-# @api_view(['GET'])
-# def animals_detail(request, id):
-#     try:
-#         animal = Animal.objects.get(id=id)
-#     except Animal.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#
-#     if request.method == 'GET':
-#         serializer = AnimalSerializer(animal, context={'request': request})
-#         return Response(serializer.data)
-#
-#
+@api_view(['GET'])
+def animals_detail(request, id):
+    try:
+        animal = Animal.objects.get(id=id)
+    except Animal.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = AnimalSerializer(animal, context={'request': request})
+        return Response(serializer.data)
+
+
 # @api_view(['GET'])
 # def animals_list(request):
 #     """

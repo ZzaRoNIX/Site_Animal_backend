@@ -27,6 +27,6 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^api/animals/create/$', views.excel_view),
     url(r'^api/animals/$', views.animal_list),
-    # url(r'^api/animals/(?P<id>[0-9]+)$', views.animals_detail),
+    url(r'^api/animals/(?P<id>[0-9]+)$', views.animals_detail),
     # url(r'^api/orders/(?P<id>[0-9]+)$', views.order_detail)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,10 +16,10 @@ class AnimalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Animal
         fields = ('id', 'author', 'idcard_registration_animal',
-                  'type_animal ', 'age_animal', 'weight_animal', 'name_animal',
+                  'type_animal', 'age_animal', 'weight_animal', 'name_animal',
                   'gender_animal', 'breed_animal', 'color_animal',
                   'hair_animal', 'ears_animal', 'tail_animal',
-                  'size_animal', 'feature_animal', 'avairy_animal', '',
+                  'size_animal', 'feature_animal', 'avairy_animal',
                   'identification_mark_animal', 'sterilization_date_animal',
                   'veterinarian_name_animal', 'socialized_animal',
                   'receipt_report_animal', 'date_receipt_report_animal',
