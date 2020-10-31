@@ -15,14 +15,16 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+import Backend.views as views
 from django.conf.urls import url
-from Backend import views
+
+
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^api/animals/$', views.excel_view),
-    # url(r'^api/animals/$', views.animals_list),
+    url(r'^api/animals/create/$', views.excel_view),
+    url(r'^api/animals/$', views.animal_list),
     # url(r'^api/animals/(?P<id>[0-9]+)$', views.animals_detail),
     # url(r'^api/orders/(?P<id>[0-9]+)$', views.order_detail)
 ]

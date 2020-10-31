@@ -92,9 +92,11 @@ def excel_view(request):
                 c = sheet.cell(row=j, column=i).value
                 mos.append(c)
         mas.append(mos)
-
+    # user id=1 - admin
     for i in mas:
-        animal = Animal(idcard_registration_animal=i[0],
+        # head_ofshelter_animal = '' - имя пользователя
+
+        animal = Animal(author=User.objects.get(id=1), idcard_registration_animal=i[0],
                         type_animal=i[1], age_animal=i[2],
                         weight_animal=i[3], name_animal=i[4],
                         gender_animal=i[5], breed_animal=i[6], color_animal=i[7],
@@ -118,3 +120,33 @@ def excel_view(request):
         animal.save()
         print(animal)
     # print(mass)
+
+
+@api_view(['GET'])
+def animal_list(request):
+    """
+    List of animals.
+    """
+    if request.method == 'GET':
+        data = []
+        next_page = 1
+        previous_page = 1
+        animals = Animal.objects.all().order_by('idcard_registration_animal')
+        page = request.GET.get('page', 1)
+        paginator = Paginator(animals, 20)
+        try:
+            data = paginator.page(page)
+        except PageNotAnInteger:
+            data = paginator.page(1)
+        except EmptyPage:
+            data = paginator.page(paginator.num_pages)
+        serializer = AnimalListSerializer(data, context={'request': request}, many=True)
+        if data.has_next():
+            next_page = data.next_page_number()
+        if data.has_previous():
+            previous_page = data.previous_page_number()
+        return Response({'data': serializer.data,
+                         'count': paginator.count,
+                         'numpages': paginator.num_pages,
+                         'nextlink': '/api/animals/?page=' + str(next_page),
+                         'prevlink': '/api/animals/?page=' + str(previous_page)})
