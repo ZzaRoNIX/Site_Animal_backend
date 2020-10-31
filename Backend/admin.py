@@ -11,24 +11,25 @@ from .models import *
 
 class AnimalAdmin(admin.ModelAdmin):
     readonly_fields = ['author']
+
     # exclude = ['author']
     def save_model(self, request, obj, form, change):
         if form.is_valid():
-            if not request.user.is_superuser or not form.cleaned_data['author']:
-                obj.author = request.user
-                obj.save()
-            elif form.cleaned_data['author']:
-                obj.author = form.cleaned_data['author']
-                obj.save()
+            # if not request.user.is_superuser or not form.cleaned_data['author']:
+            obj.author = request.user
+            obj.save()
+        # elif form.cleaned_data['author']:
+        #     obj.author = form.cleaned_data['author']
+        #     obj.save()
         # obj.author = request.user
         # obj.save()
         # print (obj)
-        # print (obj.__dict__)
+        # print (obj.dict)
+
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(author=request.user)
-
 
 admin.site.register(Animal, AnimalAdmin)

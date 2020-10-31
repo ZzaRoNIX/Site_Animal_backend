@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 import Backend.views as views
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 
@@ -27,4 +29,4 @@ urlpatterns = [
     url(r'^api/animals/$', views.animal_list),
     # url(r'^api/animals/(?P<id>[0-9]+)$', views.animals_detail),
     # url(r'^api/orders/(?P<id>[0-9]+)$', views.order_detail)
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
